@@ -57,6 +57,7 @@ struct R {
     struct APIPath {
         
         static let discoverMovie = "/discover/movie"
+        static let searchMovie = "/search/movie"
         
     }
     

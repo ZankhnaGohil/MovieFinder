@@ -8,19 +8,22 @@
 
 import UIKit
 
-class MovieListViewController: UIViewController {
+class MovieListViewController: UIViewController, UISearchControllerDelegate, UISearchResultsUpdating {
 
     @IBOutlet weak var collectionView: UICollectionView!
     var dataSourceArray:[Movie] = []
     
+    var searchResultViewController: MovieSearchResultViewController!
+    var searchController: UISearchController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setUpSearchController()
         self.collectionView.register(UINib.init(nibName: R.CellId.movieListCellID, bundle: nil), forCellWithReuseIdentifier: R.CellId.movieListCellID)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.fetchMovies()
-        
+                
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,7 +45,58 @@ class MovieListViewController: UIViewController {
         }
     }
     
+    func setUpSearchController() {
     
+        self.searchResultViewController = MovieSearchResultViewController(collectionViewLayout: self.getFlowLayout())
+        self.searchController = UISearchController(searchResultsController: self.searchResultViewController)
+        
+        self.searchController.searchResultsUpdater = self
+        self.searchController.delegate = self
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.dimsBackgroundDuringPresentation = true
+        
+        self.navigationItem.titleView = searchController.searchBar
+        
+        self.definesPresentationContext = true
+        
+    }
+    
+    fileprivate func getFlowLayout() -> UICollectionViewFlowLayout {
+    
+        let flowLayout:UICollectionViewFlowLayout = UICollectionViewFlowLayout();
+        
+        flowLayout.itemSize = CGSize(width: self.view.frame.size.width/2-12, height: 270)
+        flowLayout.minimumInteritemSpacing = 8
+        flowLayout.minimumLineSpacing = 8
+        flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        
+        return flowLayout
+        
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+    
+        if searchController.searchBar.text == nil {
+            return
+        } else if searchController.searchBar.text?.characters.count == 0 {
+            return
+        }
+        
+        let networkManager = NetworkManager()
+        networkManager.fetchSearchResults(searchText: searchController.searchBar.text!) { (movie, error) in
+            if let err = error {
+                
+                print(err.localizedDescription)
+                }
+            else {
+                if (movie?.count)! > 0 {
+                self.searchResultViewController.movie = movie!
+                self.searchResultViewController.collectionView?.reloadData()
+                }
+            }
+        }
+        
+    }
     
     /*
     // MARK: - Navigation

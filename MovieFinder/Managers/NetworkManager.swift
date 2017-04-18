@@ -30,4 +30,21 @@ class NetworkManager: NSObject {
         
     }
 
+    func fetchSearchResults(searchText:String , onCompletion: @escaping ([Movie]?,Error?) -> Void) -> Void {
+        
+        let URL = R.apiBaseUrl + R.APIPath.searchMovie + "?api_key=17be64f009f004298adba6df55c59ec4&page=1&query=" + searchText
+        
+        Alamofire.request(URL).responseObject { (response:DataResponse<MoviePageResponse>) in
+            
+            if let error = response.result.error {
+                onCompletion(nil,error)
+            }
+            else if let movieResponse = response.result.value {
+                onCompletion(movieResponse.movies,nil)
+            }
+        }
+
+        
+    }
+    
 }
