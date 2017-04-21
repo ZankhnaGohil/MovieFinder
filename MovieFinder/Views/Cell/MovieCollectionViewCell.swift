@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 class MovieCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var imageViewMovie: UIImageView!
     @IBOutlet weak var labelMovieTitle: UILabel!
     
@@ -19,21 +19,49 @@ class MovieCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-   public func setUpCell(movie:Movie){
+    public func setUpCellResult(movie:Movie , sortType:sortBy){
         
-        self.labelMovieTitle.text = movie.title
-    if let path = movie.posterPath {
-    
-        let url = R.imageBaseUrl + R.ImageSize.thumbnail + path
-        
-        let urlString = URL(string: url)
-        
-        self.imageViewMovie.kf.setImage(with: urlString)
-        
+        if let title = movie.title {
+            if  movie.title.characters.count != 0 {
+                self.labelMovieTitle.text = title
+            }
+        } else {
+            self.labelMovieTitle.text = movie.name
+        }
+        //
+        //        if sortType == .movie {
+        //
+        //        self.labelMovieTitle.text = movie.title
+        //
+        //        }
+        //        else {
+        //            self.labelMovieTitle.text = movie.name
+        //        }
+        if let path = movie.posterPath {
+            let url = R.imageBaseUrl + R.ImageSize.thumbnail + path
+            let urlString = URL(string: url)
+            self.imageViewMovie.kf.setImage(with: urlString)
         }
         
     }
-
+    
+    public func setUpCell(movie:Movie) {
+        
+        if let title = movie.title {
+            if  movie.title.characters.count != 0 {
+                self.labelMovieTitle.text = title
+            }
+        } else {
+            self.labelMovieTitle.text = movie.name
+        }
+        
+        if let path = movie.posterPath {
+            let url = R.imageBaseUrl + R.ImageSize.thumbnail + path
+            let urlString = URL(string: url)
+            self.imageViewMovie.kf.setImage(with: urlString)
+            
+        }
+    }
 }
 
 //extension String {

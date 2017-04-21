@@ -30,6 +30,8 @@ struct R {
         static let movieListCellID = "MovieCollectionViewCell"
         static let movieDetailHeader = "MovieHeaderTableViewCell"
         static let movieDetail = "MovieDetailTableViewCell"
+        static let movieOverview = "OverviewTableViewCell"
+        static let moreInfo = "MoreInfoTableViewCell"
         
     }
     
@@ -57,7 +59,10 @@ struct R {
     struct APIPath {
         
         static let discoverMovie = "/discover/movie"
-        static let searchMovie = "/search/movie"
+        static let searchMovie = "/search/multi"
+        static let genreMovie = "/genre/movie/list"
+        static let displaySeries = "/discover/tv"
+        static let searchSeries = "/search/tv"
         
     }
     
@@ -68,6 +73,13 @@ struct R {
         static let page = "page"
         static let language =  "with_original_language"
         static let voteCount = "vote_count.gte"
+        
+        
+    }
+    
+    struct SegueIDS {
+        
+        static let detailSegue = "DetailSegueID"
         
     }
     

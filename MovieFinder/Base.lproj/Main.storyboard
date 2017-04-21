@@ -37,23 +37,69 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DM7-24-FsO">
+                                <segments>
+                                    <segment title="Movies"/>
+                                    <segment title="TV Shows"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentControlClickAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="wTo-Ng-J5D"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="V1L-25-WTd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="44" id="4QL-7j-6us"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="V1L-25-WTd" secondAttribute="bottom" id="LII-fa-XAp"/>
+                            <constraint firstItem="DM7-24-FsO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T0L-Yl-zsH"/>
+                            <constraint firstItem="DM7-24-FsO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="VcW-bF-Wgd"/>
                             <constraint firstAttribute="trailing" secondItem="V1L-25-WTd" secondAttribute="trailing" id="dcg-qm-PC4"/>
-                            <constraint firstItem="V1L-25-WTd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="r51-zU-av0"/>
                             <constraint firstItem="V1L-25-WTd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rky-B3-cGe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="uMM-L4-xB6"/>
+                    <navigationItem key="navigationItem" id="uMM-L4-xB6">
+                        <nil key="title"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="V1L-25-WTd" id="d0N-34-hCI"/>
+                        <segue destination="wbL-a3-9l1" kind="show" identifier="DetailSegueID" id="ut2-iB-L2X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="894" y="-552"/>
+        </scene>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="XVx-MH-Dng">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="wbL-a3-9l1" customClass="MovieDetailViewController" customModule="MovieFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zho-cR-X6Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="lfp-xk-zmX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CNn-ZG-2dr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ost-Q7-yhf">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ost-Q7-yhf" firstAttribute="leading" secondItem="CNn-ZG-2dr" secondAttribute="leading" id="RPV-gU-HL3"/>
+                            <constraint firstAttribute="trailing" secondItem="Ost-Q7-yhf" secondAttribute="trailing" id="by0-bJ-kC8"/>
+                            <constraint firstItem="Ost-Q7-yhf" firstAttribute="top" secondItem="Zho-cR-X6Q" secondAttribute="bottom" id="vBP-si-Seo"/>
+                            <constraint firstItem="lfp-xk-zmX" firstAttribute="top" secondItem="Ost-Q7-yhf" secondAttribute="bottom" id="zsc-Xi-Ymi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Ost-Q7-yhf" id="jQk-4w-IDM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="drB-eH-yRf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1642" y="-549"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0EJ-l9-NBw">

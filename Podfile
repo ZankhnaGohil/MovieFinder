@@ -10,6 +10,8 @@ target 'MovieFinder' do
 	pod 'Alamofire'
 	pod 'Kingfisher'
 	pod 'AlamofireObjectMapper'
+	pod 'PKHUD'
+	pod 'MBProgressHUD'
 
   target 'MovieFinderTests' do
     inherit! :search_paths

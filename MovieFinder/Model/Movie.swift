@@ -20,6 +20,9 @@ class Movie: Mappable {
     var releaseDate:String?
     var overview:String?
     var voteCount:Int?
+    var name:String!
+    var genreIDS:[Int]?
+    var first_air_date:String?
     
     func mapping(map: Map) {
         
@@ -32,7 +35,9 @@ class Movie: Mappable {
         self.releaseDate <- map["release_date"]
         self.overview <- map["overview"]
         self.voteCount <- map["vote_count"]
-        
+        self.name <- map["name"]
+        self.genreIDS <- map["genre_ids"]
+        self.first_air_date <- map["first_air_date"]
     }
   
     required init?(map: Map) {
