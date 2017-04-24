@@ -49,12 +49,12 @@ class MoreInfoTableViewCell: UITableViewCell {
         if let path = movie.posterPath {
             let url = R.imageBaseUrl + R.ImageSize.thumbnail + path
             let urlString = URL(string: url)
-            self.imageViewMovie.kf.setImage(with: urlString)
+            self.imageViewMovie.kf.setImage(with: urlString, placeholder: UIImage(named: "placeholder"), options: nil, progressBlock: nil, completionHandler: nil)
         }
         
         if let genres = movie.genreIDS {
             let genreManager = GenreManager.sharedInstance
-            let genreString = genreManager.getGenreStringFromGenreIDs(array: genres)
+            let genreString = genreManager.getGenreStringFromGenreIDs(arrayOfGenerIds: genres)
             self.labelGenre.text = genreString
         }
     }

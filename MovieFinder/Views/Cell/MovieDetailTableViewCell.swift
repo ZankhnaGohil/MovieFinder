@@ -38,7 +38,7 @@ class MovieDetailTableViewCell: UITableViewCell {
         if let path = movie.backdropPath {
             let url = R.imageBaseUrl + R.ImageSize.backdrop + path
             let urlString = URL(string: url)
-            self.imageViewMovie.kf.setImage(with: urlString)
+            self.imageViewMovie.kf.setImage(with: urlString, placeholder: UIImage(named: "placeholder"), options: nil, progressBlock: nil, completionHandler: nil)
             
         }
     }

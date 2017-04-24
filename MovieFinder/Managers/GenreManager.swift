@@ -12,7 +12,8 @@ class GenreManager {
 
     static let sharedInstance = GenreManager()
     var genre: [Genre] = []
-     init() {
+    
+    private init() {
         let networkManager: NetworkManager = NetworkManager()
         networkManager.fetchGenres { (genreData, error) in
             if let err = error {
@@ -24,17 +25,20 @@ class GenreManager {
         }
     }
     
-    func getGenreStringFromGenreIDs(array: [Int]) -> String {
-        var selectedGenres: [String] = []
-        
-        for genre in self.genre {
-            for generId in array {
-                if genre.id == generId {
-                    selectedGenres.append(genre.name)
+    func getGenreStringFromGenreIDs(arrayOfGenerIds: [Int]?) -> String {
+        if let inputArray = arrayOfGenerIds, inputArray.count > 0 {
+            var selectedGenres: [String] = []
+            
+            for genre in self.genre {
+                for generId in inputArray {
+                    if genre.id == generId {
+                        selectedGenres.append(genre.name)
+                    }
                 }
             }
+            return selectedGenres.joined(separator: ",")
+        } else {
+            return ""
         }
-        
-        return selectedGenres.joined(separator: ",")
     }
 }

@@ -19,12 +19,6 @@ struct R {
         
     }
     
-    struct StoryBoard {
-        
-        static let main = "Main"
-        
-    }
-    
     struct CellId {
         
         static let movieListCellID = "MovieCollectionViewCell"
@@ -43,12 +37,6 @@ struct R {
         static let thumbnail = "w154"
         static let small = "w92"
         static let backdrop = "w342"
-        
-    }
-    
-    struct movieLanguage {
-        
-        static let english = "en"
         
     }
     
@@ -71,8 +59,7 @@ struct R {
         static let sortBy = "sort_by"
         static let apiKey = "api_key"
         static let page = "page"
-        static let language =  "with_original_language"
-        static let voteCount = "vote_count.gte"
+        static let query = "query"
         
         
     }

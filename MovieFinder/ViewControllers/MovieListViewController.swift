@@ -9,7 +9,7 @@
 import UIKit
 import PKHUD
 
-enum sortBy: Int {
+enum DisplayType: Int {
     case movie = 0
     case series = 1
 }
@@ -19,7 +19,7 @@ class MovieListViewController: UIViewController, UISearchControllerDelegate, UIS
     var dataSourceArray:[Movie] = []
     var searchResultViewController: MovieSearchResultViewController!
     var searchController: UISearchController!
-    var selectedSortType: sortBy = .movie
+    var selectedSortType: DisplayType = .movie
     @IBOutlet weak var collectionView: UICollectionView!
     var page:Int = 0
     
@@ -115,13 +115,15 @@ class MovieListViewController: UIViewController, UISearchControllerDelegate, UIS
             self.selectedSortType = .series
         }
         self.dataSourceArray = []
+        self.page = 0
         self.fetchMovies()
+        
     }
     
-    fileprivate func fetchMovies() -> Void {
+    func fetchMovies() -> Void {
         
         let networkManager:NetworkManager = NetworkManager()
-        networkManager.fetchMovies(page: self.page+1, sortType: self.selectedSortType) { (movies, error) in
+        networkManager.fetchMovies(page: self.page + 1, sortType: self.selectedSortType) { (movies, error) in
             HUD.hide(animated: true)
             if let err = error{
                 self.setUpAlert(errorMsg: err.localizedDescription, onRetry: { 
@@ -162,7 +164,7 @@ extension MovieListViewController:UICollectionViewDataSource,UICollectionViewDel
         let cell:MovieCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: R.CellId.movieListCellID, for: indexPath) as! MovieCollectionViewCell
         let movie:Movie = self.dataSourceArray[indexPath.row]
         
-        cell.setUpCellResult(movie: movie, sortType: self.selectedSortType)
+        cell.setUpCell(movie: movie)
         
         if indexPath.row == self.dataSourceArray.count - 3 {
             self.fetchMovies()

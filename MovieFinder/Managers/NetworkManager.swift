@@ -12,7 +12,7 @@ import AlamofireObjectMapper
 
 class NetworkManager: NSObject {
     
-    func fetchMovies(page:Int, sortType:sortBy, onCompletion: @escaping ([Movie]?,Error?) -> Void) -> Void {
+    func fetchMovies(page:Int, sortType:DisplayType, onCompletion: @escaping ([Movie]?,Error?) -> Void) -> Void {
         
         var URLPath = R.APIPath.discoverMovie
         
@@ -38,9 +38,11 @@ class NetworkManager: NSObject {
 
     func fetchSearchResults(searchText:String , onCompletion: @escaping ([Movie]?,Error?) -> Void) -> Void {
         
-        let url = R.apiBaseUrl + R.APIPath.searchMovie + "?api_key=17be64f009f004298adba6df55c59ec4&page=1&query=" + searchText
+        let url = R.apiBaseUrl + R.APIPath.searchMovie
         
-        Alamofire.request(url).responseObject { (response:DataResponse<MoviePageResponse>) in
+        let param:Dictionary<String,Any> = [R.APIParamKey.apiKey:R.apiKey, R.APIParamKey.page:1,R.APIParamKey.query:searchText]
+        
+        Alamofire.request(url, parameters: param).responseObject { (response:DataResponse<MoviePageResponse>) in
             
             if let error = response.result.error {
                 onCompletion(nil,error)
@@ -55,7 +57,7 @@ class NetworkManager: NSObject {
     func fetchGenres(onCompletion: @escaping ([Genre]?,Error?) -> Void) -> Void {
     
         let url = R.apiBaseUrl + R.APIPath.genreMovie + "?api_key=17be64f009f004298adba6df55c59ec4"
-        
+    
         Alamofire.request(url).responseObject { (response:DataResponse<GenreList>) in
             
             if let error = response.result.error {

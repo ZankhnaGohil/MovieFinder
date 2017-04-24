@@ -18,33 +18,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    
-    public func setUpCellResult(movie:Movie , sortType:sortBy){
         
-        if let title = movie.title {
-            if  movie.title.characters.count != 0 {
-                self.labelMovieTitle.text = title
-            }
-        } else {
-            self.labelMovieTitle.text = movie.name
-        }
-        //
-        //        if sortType == .movie {
-        //
-        //        self.labelMovieTitle.text = movie.title
-        //
-        //        }
-        //        else {
-        //            self.labelMovieTitle.text = movie.name
-        //        }
-        if let path = movie.posterPath {
-            let url = R.imageBaseUrl + R.ImageSize.thumbnail + path
-            let urlString = URL(string: url)
-            self.imageViewMovie.kf.setImage(with: urlString)
-        }
-        
-    }
-    
     public func setUpCell(movie:Movie) {
         
         if let title = movie.title {
@@ -58,16 +32,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
         if let path = movie.posterPath {
             let url = R.imageBaseUrl + R.ImageSize.thumbnail + path
             let urlString = URL(string: url)
-            self.imageViewMovie.kf.setImage(with: urlString)
+            self.imageViewMovie.kf.setImage(with: urlString, placeholder: UIImage(named: "placeholder"), options: nil, progressBlock: nil, completionHandler: nil)
             
         }
     }
 }
-
-//extension String {
-//
-//    func getImageURLfor(width:String) -> String {
-//        return R.imageBaseUrl + width + self
-//    }
-//    
-//}
